@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+</head>
+<body>
+    
+  <div id="container"></div>
+
+  <script type = "text/babel"> 
+
+    //Component
+    var CheckBox = React.createClass({
+
+     //set initial state
+     
+     //Handle Checkbox Event
+     //toggling the state value based on check box action
+     //if the state value is changed, ReactDOM will automatically refreshes the field value, in this case the <h2> tag
+     //value will change immediatly after this event gets called. 
+     //handleChecked: function(){
+      //      this.setState({checked: !this.state.checked})
+     //},
+
+     //Component render function
+     render: function(){
+
+        //setting local variabel to display the checkbox state
+        //var msg;
+        //if (this.state.checked) {
+        //  msg = 'Checked'
+       // }
+        //else{
+         //   msg = 'UnChecked'
+        //}
+
+      //  return (
+         //<div>
+            
+          //  <h2>The state of the checkbox is: {msg} </h2>
+          //</div>
+       // )
+
+     };
+
+   });
+
+   //getInitialState: function(){
+    //     return {checked: true}
+     //},
+//<input type="checkbox" onChange = {this.handleChecked} defaultChecked = {this.state.checked}/>
+    
+  //ReactDOM.render(<div> test </div>, document.getElementById('container'));
+  ReactDOM.render(<div>hello</div>,document.getElementById('container'));
+  
+  </script>
+
+</body>
+</html>

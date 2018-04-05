@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/15.1.0/react-bootstrap.min.js"></script>
+
+</head>
+<body>
+
+     <div id="container"></div>
+
+     <script type="text/babel">   
+     
+      
+      var Comment = React.createClass({
+
+        pokeme: function (){
+            //alert("Poked  me");
+            react-bootstrap.alert;
+        },
+
+
+        render: function () {
+
+            return (
+                <div>
+                   <div> {this.props.children}</div>
+                   <button>waiting for name</button>
+                   <button onClick={this.pokeme}>poke me </button>
+                   
+                </div>
+
+            );
+            
+        }
+
+      });
+
+      ReactDOM.render(<div>
+      
+         <Comment>From source </Comment>
+      </div>, document.getElementById('container'));
+     
+     </script>
+
+
+</body>
+</html>

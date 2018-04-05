@@ -24,11 +24,28 @@
          }
    });
 
+   var Comp2 = React.createClass({
+
+      render: function(){
+
+        return (<div>
+          <h4> {this.props.AdMessage} </h4>
+                   </div>
+               
+         );
+      }
+      
+
+   });
+
+
     ReactDOM.render(
       <div>  
        <Comp1 message = "My Parameter"/>
+       <Comp2 AdMessage = "Additional Message"/>
        <Comp1 message = "Working"/>
        <Comp1 message = "Correctly"/>
+       <Comp2 AdMessage = "Finally I learned some React programming"/>
        <Comp1 message = "!!!!!!!"/>
       </div>
       ,document.getElementById('example'));
