@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js'></script>
+
+</head>
+<body>
+    
+ <div id = "container"></div>
+ <script type="text/babel"> 
+ 
+    var Comments = React.createClass(
+        {
+
+        getInitialState: function()
+            {
+               return{EditState: false}
+            },
+        
+
+        EditText: function()
+        {
+            this.setState({EditState:true})
+        },
+
+        SaveText: function()
+        {
+            this.props.updateCommentText(this.refs.newText.value,this.props.index);
+            this.setState({EditState:false})
+        },
+
+        CancelEdit: function()
+        {
+            this.setState({EditState:false})
+        },
+
+        RemoveText: function()
+        {
+            this.props.delteCommentText(this.props.index);
+        },
+
+        NormalMode: function()
+        {
+            return(
+                <div className="commentContainer">
+                    <div>
+                        <h2>{this.props.children}</h2>
+                    </div>
+                    <div>
+                    <button onClick = {this.EditText} className="button-primary" >Edit</button>
+                    <button onClick = {this.RemoveText} className="button-danger">Delete</button>
+                    </div>
+                </div>
+            );
+        },
+
+        EditMode: function()
+        {
+            return(
+                <div className="commentContainer">
+                    <div>
+                        <textarea ref="newText" defaultValue = {this.props.children} ></textarea>
+                    </div>
+                    <div>
+                    <button onClick = {this.SaveText} className="button-success" >Save</button>
+                    <button onClick = {this.CancelEdit} className="button-primary">Cancel</button>
+                    </div>
+                </div>
+            );
+        },
+
+        render: function (){
+              
+              if (this.state.EditState)
+               {
+                  return this.EditMode();
+               }
+              else
+              {
+                  return this.NormalMode();
+              }
+          }
+
+        }
+    );
+
+
+   var Board = React.createClass
+   (
+       {
+           getInitialState: function(){
+               return {commentList:
+                        [] 
+               }
+           },
+
+           RemoveComment: function(i){
+
+               var arr = this.state.commentList;
+               arr.splice(i,1);
+               this.setState({commentList:arr})
+           },
+
+           UpdateComment: function(newText,i){
+
+             var arr = this.state.commentList;
+             arr[i] = newText;
+             this.setState({commentList:arr})
+           },
+
+           AddComment: function(newText){
+              var arr = this.state.commentList;
+              arr.push(newText);
+              this.setState({commentList:arr});
+           },
+
+           RenderControls: function(text,i){
+              return(
+                  <Comments key={i} index={i} updateCommentText = {this.UpdateComment} delteCommentText = {this.RemoveComment}>{text}</Comments>                  
+              );
+           },
+
+           render: function(){
+               return (
+                   <div>
+                        <button onClick={this.AddComment.bind(null,"Type something here")} className="button-info create">Add New Comment</button>
+                        <div className = "board">
+                            {this.state.commentList.map(this.RenderControls)}
+                        </div>
+                   </div>
+                   );
+           }
+       }
+   );
+
+   ReactDOM.render(
+      <Board/>
+       ,document.getElementById('container'));
+ </script>
+
+
+</body>
+</html>

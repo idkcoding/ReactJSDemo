@@ -20,103 +20,110 @@
 
  var Comment = React.createClass({
 
-  getInitialState: function(){
+        getInitialState: function(){
 
-    return {EditState: false}
-  },
+            return {EditState: false}
+        },
 
-  EditClick: function(){
+        EditClick: function(){
 
-   this.setState({EditState: true})
-  },
+        this.setState({EditState: true})
+        },
 
-  CancelClick: function(){
-      this.setState({EditState: false})
-  },
+        CancelClick: function(){
+            this.setState({EditState: false})
+        },
 
-  SaveClick: function(){
-      this.setState({EditState: false})
-  },
+        SaveClick: function(){
+            this.setState({EditState: false})
+        },
 
-  NormalMode: function(){
+        NormalMode: function(){
 
-    return(
-      <div>
+            return(
             <div>
-                <h2>{this.props.children}</h2>
-            </div>
-            <div>
-                <button onClick={this.EditClick}> Edit </button>
-                <button> Remove </button>
-            </div>
-        </div>
-    );
-  },
+                    <div>
+                        <h2>{this.props.children}</h2>
+                    </div>
+                    <div>
+                        <button onClick={this.EditClick}> Edit </button>
+                        <button> Remove </button>
+                    </div>
+                </div>
+            );
+        },
 
-  EditMode: function(){
-   return(
-       <div>
+        EditMode: function(){
+        return(
             <div>
-                <textarea defaultValue={this.props.children}></textarea>
-               
-                
-            </div>
-            <div>
-                <button onClick={this.SaveClick}> Save </button>
-                <button onClick={this.CancelClick}> Cancel </button>
-            </div>
-        </div>
-   );
-  },
+                    <div>
+                        <textarea ref='newText' defaultValue={this.props.children}></textarea>
+                    
+                        
+                    </div>
+                    <div>
+                        <button onClick={this.SaveClick}> Save </button>
+                        <button onClick={this.CancelClick}> Cancel </button>
+                    </div>
+                </div>
+        );
+        },
 
-  render: function()
-     {
-       if (this.state.EditState) 
-       {
-         return this.EditMode();
-       }
-       else
-       {
-         return this.NormalMode();
-       }           
-     }
+        render: function()
+            {
+                if (this.state.EditState) 
+                {
+                    return this.EditMode();
+                }
+                else
+                {
+                    return this.NormalMode();
+                }           
+            }
   
  }); 
 
 
-var Board = React.createClass({
+var Board = React.createClass
+(
+    {
 
-    getInitialState: function(){
+        getInitialState: function()
+        {
+            return{
+                comments: ['I like Chicken',
+                            'I want to sleep',
+                            'Bye Bye'
+                          ]
+            }
+        },
 
-     return {
-         comments: ['I like Chicken',
-             'I want to sleep',
-             'Bye Bye']
+        eachComment: function(text,i)
+        {
+            return(<Comment key={i} index={i}>{text}</Comment>);
+            
+        },
+
+        render: function()
+        {
+            return(
+                <div>
+                    <div>    
+                        <Comment>Hello there</Comment>
+                        <Comment>My Second Text</Comment>
+                        <Comment>chicken</Comment>
+                    </div>
+                    
+                    <div className = "board">
+                        {this.state.comments.map(this.eachComment)}
+                    </div>
+
+                </div>
+            );
         }
-    },
 
-    render: function(){
-    return(
-        <div>
-     <div>    
-        <Comment>Hello there</Comment>
-        <Comment>My Second Text</Comment>
-        <Comment>chicken</Comment>
-    </div>
-    <div className = "board">
-      {
-          this.state.comments.map(function(text,i){
-             return( <Comment key={i}>{text}</Comment>);
-          })
-      }
-        
-    </div>
-    </div>
-
-    );
     }
-
-    });
+);
 
 ReactDOM.render(<Board/>    
     , document.getElementById('container'));
